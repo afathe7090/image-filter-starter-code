@@ -32,6 +32,17 @@ import { url } from 'inspector';
 
   /**************************************************************************** */
 
+  app.get('/filteredimage', async (req: Request, res: Response) => {
+    const image_url = req.query.image_url.toString(); 
+    if(!image_url){
+    res.status(400).send('Image url is required');
+    }
+    const filtered_image = await filterImageFromURL(image_url);
+    res.status(200).sendFile(filtered_image, () => {
+    });
+  });
+
+
   //! END @TODO1
 
   app.get("/filteredimage", async (req: express.Request, res: express.Response) => {
